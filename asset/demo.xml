@@ -1,0 +1,56 @@
+<!-- The <mujoco> tag is the root element of any MJCF file. -->
+<mujoco model="tutorial_demo">
+
+  <!-- COMPILER: Sets directives for how the XML is compiled. -->
+  <compiler angle="degree"/>
+
+  <!-- OPTION: Defines global physics settings for the simulation. -->
+  <option gravity="0 0 0"/>
+
+  <!-- DEFAULT: Sets default values for elements defined later. -->
+  <default>
+    <!-- Default settings for all joints -->
+    <!--<joint type="hinge" limited="true" range="-90 90" damping="1" /> -->
+  </default>
+
+  <!-- ASSET: A library for all external resources. -->
+  <asset>
+    <!-- <mesh name="leg_v1" file="link.stl" /> -->
+    <!-- <mesh name="leg_v2" file="link2.stl" /> -->
+    <!-- <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="32" height="32" /> -->
+    <!-- <material name="robot_mat" rgba="0.5 0.5 0.5 1" shininess="0.5" /> -->
+  </asset>
+
+  <!-- WORLDBODY: This is where you build the physical model and scene. -->
+  <worldbody>
+    <!-- Add lights for rendering -->
+    <light pos="0 0 3" dir="0 0 -1" diffuse="1 1 1" />
+
+    <!-- Add a "ground" or "floor" plane for objects to rest on. -->
+    <geom name="floor" type="plane" size="5 5 0.1" rgba="0.8 0.9 0.8 1" />
+
+    <!-- 
+    <body name="main_body" pos="0 0 1">
+      <inertial pos=" " quat=" " mass=" " diaginertia=" "/>
+      <joint name="root_joint" type="free" />
+      <geom type="mesh" rgba="0 0 0 1" mesh="leg_v1" />
+
+      <body name="child_body" pos="0 0 0.1">
+        <inertial pos=" " quat=" " mass=" " diaginertia=" "/>
+        <joint name="child_joint" type="hinge" axis="0 1 0" />
+        <geom type="mesh" rgba="0 0 0 1" mesh="leg_v2" />
+      </body>
+    </body>
+    -->
+  </worldbody>
+  
+  <!-- EQUALITY: Define constraints that enforce relationships for parallel mechanism. -->
+  <equality>
+    <!-- <weld body1="main_body" body2="some_other_body" /> -->
+  </equality>
+
+  <!-- ACTUATOR: Define "muscles" (motors, etc.) to drive joints or tendons. -->
+  <actuator>
+    <!-- <motor name="my_motor" joint="child_joint" gear="100" /> -->
+  </actuator>
+</mujoco>

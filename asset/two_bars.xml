@@ -1,0 +1,34 @@
+<mujoco model="two_bars">
+    <default>
+        <joint type="hinge" frictionloss="0.1" damping='2' />
+    </default>
+
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="1 1 1" rgb2=".6 .8 1" width="256" height="256" />
+        <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512"/>
+        <material name="matplane" texture="texplane" texrepeat="1 1" texuniform="true" />
+    </asset>
+
+    <worldbody>
+        <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 3" dir="0 0 -1" />
+        <geom name="ground" type="plane" size="0 0 1" pos="0 0 0" quat="1 0 0 0" material="matplane" condim="3" />
+
+        <body name="b0" pos="0 0 1">
+            <geom type="box" size="0.2 0.02 0.02"/>
+            
+            <body name="b1" pos="-0.2 0 -0.2" euler="0 90 0">
+                <geom type="box" size="0.2 0.02 0.02"/>
+                <joint name="j0" type="hinge" pos="-0.2 0 0" axis="0 1 0" />
+            </body>
+        </body>
+    </worldbody>
+
+    <contact>
+        <exclude name="e0" body1="b0" body2="b1" />
+    </contact>
+
+    <actuator>
+        <position joint="j0" ctrllimited="true" ctrlrange="-1.0 1.0" kp="30" />
+    </actuator>
+</mujoco>
+
